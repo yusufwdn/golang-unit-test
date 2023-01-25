@@ -1,0 +1,15 @@
+========== UNIT TEST - BEST PRACTICES ==========
+* Untuk membuat file unit test, kita harus menggunakan _test ( contoh: hello_world.go => hello_world_test.go )
+* Nama fungsi untuk unit test pun sudah ditentukan, yaitu diawali dengan Test ( contoh: TestHelloWorld() )
+* Fungsi harus memiliki parameter (t *testing.T) dan tidak me-return value
+
+========== MENJALANKAN UNIT TEST ==========
+* go test => melakukan test pada file di sebuah direktori
+* go test {nama file} => melakukan test pada sebuah file
+* go test ./... => melakukan test pada file di sebuah direktori dan seluruh direktori di dalamnya
+* go test -v -run=TestHelloWorld2 (nama func) => menjalakan test di fungsi spesifik
+* go test -v -run TestFunc/SubTestFunc => menjalankan sub-test spesifik
+
+========== MENGGAGALKAN UNIT TEST ==========
+* t.Fail() => return akan dianggap gagal, namun tetap melanjutkan ke kode program selanjutanya (bukan test selanjutnya)
+* t.FailNow() => saat ketemu fungsi ini, langsung saat itu juga digagalkan dan tidak melanjutkan fungsi pada kode program
