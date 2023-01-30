@@ -9,6 +9,52 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+/**
+	========= Benchmark =========
+
+	*** Running Benchmark ***
+
+	** Menjalankan seluruh benchmark dengan unit testnya di dalam module.
+	- go test -v -bench=.
+
+	** Menjalankan benchmark tanpa unit test:
+	- go test -v -run=GakAdaFungsiTest -bench=.
+	- Penjelasan: -run=GakAdaFungsiTest itu karena di dalam module memang fungsi tersebut
+	  tidak ada jadi sistem tidak akan menjalankan fungsi tersebut.
+
+	** Menjalankan benchmark secara spesifik
+	- go test -v -run=GakAdaFungsiTest -bench=BenchmarkTest
+
+	** Menjalankan benchmark di seluruh module
+	- go test -v -bench=. ./...
+
+**/
+
+func BenchmarkHelloWorld(b *testing.B) {
+	// TODO: Initialize
+	for i := 0; i < b.N; i++ {
+		HelloWorld("Cupsky")
+	}
+}
+
+func BenchmarkHelloWorldSub(b *testing.B) {
+	// sub benchmark
+	param1 := "Pada hari minggu ku turut ayah ke kota, naik delman istimewa ku duduk di muka."
+	b.Run(param1, func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWorld(param1)
+		}
+	})
+
+	// sub benchmark
+	param2 := "Ku duduk di samping pak kusir yang sedang bekerja."
+	b.Run(param2, func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWorld(param2)
+		}
+	})
+}
+
 // table test
 // adalh metode testing dengan menggunakan data di dalam slice/array (berupa name, request, danexpected)
 // lalu melooping data tersebut sehingga bisa disebut dengan dinamis.
